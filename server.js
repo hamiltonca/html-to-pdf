@@ -11,9 +11,6 @@ app.get('/health', async (req, res) => {
 })
 app.post( '/', async (req, res) => {
     const reqBody = await req.body.toString()
-    const contentType = req.header('Content-type')
-    console.log("Content type:" + contentType)
-    console.log("body:" + reqBody)
     const browser = await puppeteer.launch( {product:'chrome'})
     const page = await browser.newPage()
     await page.emulateMediaType('screen')
@@ -22,18 +19,11 @@ app.post( '/', async (req, res) => {
         height: 1200,
         isMobile: false
     })
-    const loaded = await page.setContent(reqBody)
-    console.log("loaded: " + loaded)
+    await page.setContent(reqBody)
     // await page.emulate(options: { viewport:{ isMobile: false}})
     pdf = await page.pdf( {
         format: "letter",
-        printBackground: true,
-        margin: {
-            top: 0,
-            bottom: 0,
-            left: 0,
-            right: 0
-        }
+        printBackground: true
     })
     return res.set('Content-Type',"application/pdf")
         .send(pdf)
