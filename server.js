@@ -11,7 +11,14 @@ app.get('/health', async (req, res) => {
 })
 app.post( '/', async (req, res) => {
     const reqBody = await req.body.toString()
-    const browser = await puppeteer.launch( {product:'chrome'})
+    const browser = await puppeteer.launch(
+        {product:'chrome',
+            executablePath :'/opt/google/chrome/chrome',
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox'
+            ]
+        })
     const page = await browser.newPage()
     await page.emulateMediaType('screen')
     await page.setViewport( {
@@ -33,7 +40,7 @@ app.post( '/', async (req, res) => {
 //
 // }
 
-var port = 3000
+const port = 80
 app.listen(port, () => {
     console.log("Server is running on " + port)
 })

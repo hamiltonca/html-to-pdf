@@ -1,0 +1,12 @@
+services:
+  web:
+    image: hamiltonca/html-to-pdf
+    ports:
+      - "80:80"
+    volumes:
+      - .:/code
+      - logvolume01:/var/log
+
+
+volumes:
+  logvolume01: {}

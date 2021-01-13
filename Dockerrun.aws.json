@@ -1,0 +1,11 @@
+{
+  "Image": {
+    "Name": "hamiltonca/html-to-pdf"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 80,
+      "HostPort": 80
+    }
+  ]
+}
