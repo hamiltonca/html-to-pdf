@@ -30,7 +30,7 @@ COPY --chown=node:node *.json ./
 COPY --chown=node:node node_modules ./node_modules
 COPY --chown=node:node runit.sh ./
 
-EXPOSE 80
+EXPOSE 8080
 
 USER node
 ENTRYPOINT ./runit.sh
